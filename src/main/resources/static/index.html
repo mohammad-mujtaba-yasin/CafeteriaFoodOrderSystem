@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cafeteria Food Order &amp; Billing System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Panel -->
+        <header class="top-panel">
+            <div class="header-left">
+                <div class="logo-icon">&#9749;</div>
+                <h1>Cafeteria Food Order &amp; Billing System</h1>
+            </div>
+            <div class="header-right">
+                <div class="live-clock-badge">
+                    <span class="clock-icon">&#128339;</span>
+                    <span id="liveClock">Loading time...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Status / Notification Bar -->
+        <div id="statusMessage" class="status-banner info-status">
+            Welcome to Cafeteria System! (UI Skeleton - Day 2)
+        </div>
+
+        <!-- Main Content Section: Order View -->
+        <main id="orderView" class="main-content">
+            <div class="content-grid">
+                <!-- Left Column: Menu & Actions -->
+                <section class="card menu-card">
+                    <div class="card-header">
+                        <h2>Menu Items</h2>
+                        <span class="badge" id="menuCountBadge">Loading...</span>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table" id="menuTable">
+                            <thead>
+                                <tr>
+                                    <th class="col-select">Select</th>
+                                    <th>Item</th>
+                                    <th>Category</th>
+                                    <th>Price (₹)</th>
+                                    <th class="col-qty">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody id="menuTableBody">
+                                <tr>
+                                    <td colspan="5" class="text-center" style="padding: 1.5rem; color: var(--text-secondary);">
+                                        Loading menu items from database...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-footer-action">
+                        <button type="button" class="btn btn-secondary" id="btnAddOrder">&#43; Add to Order</button>
+                    </div>
+                </section>
+
+                <!-- Current Order Card -->
+                <section class="card current-order-card">
+                    <div class="card-header">
+                        <h2>Current Order</h2>
+                        <span class="badge" id="orderCountBadge">0 Items</span>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="data-table" id="orderTable">
+                            <thead>
+                                <tr>
+                                    <th class="col-select">Select</th>
+                                    <th>Item</th>
+                                    <th class="col-qty">Quantity</th>
+                                    <th>Unit (₹)</th>
+                                    <th>Line Total (₹)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orderTableBody">
+                                <tr id="emptyOrderRow">
+                                    <td colspan="5" class="text-center" style="padding: 1.5rem; color: var(--text-muted);">
+                                        No items in order. Select items from menu and click "Add to Order".
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Action Row Buttons -->
+                    <div class="action-row">
+                        <button type="button" class="btn btn-secondary" id="btnRemoveItem">Remove Item</button>
+                        <button type="button" class="btn btn-outline" id="btnClear">Clear</button>
+                        <button type="button" class="btn btn-primary" id="btnCalculate">Calculate Bill</button>
+                    </div>
+                </section>
+
+                <!-- Right Column: Invoice Panel & Bottom Controls -->
+                <section class="card invoice-card">
+                    <div class="card-header">
+                        <h2>Itemised Invoice</h2>
+                        <span class="receipt-pill">Preview</span>
+                    </div>
+
+                    <div class="invoice-container">
+                        <pre id="invoiceArea" class="invoice-display">================================================
+          CAFETERIA FOOD ORDER &amp; BILLING
+================================================
+Order No : #1001 (Sample Preview)
+Date/Time: Sample Invoice
+------------------------------------------------
+Item                Qty    Unit (₹)    Total (₹)
+------------------------------------------------
+Veg Sandwich          2       60.00       120.00
+Tea                   1       15.00        15.00
+------------------------------------------------
+Grand Total:                             ₹135.00
+================================================
+       Thank you for dining with us!
+================================================</pre>
+                    </div>
+
+                    <!-- Bottom Panel Buttons -->
+                    <div class="bottom-panel">
+                        <button type="button" class="btn btn-success" id="btnSaveOrder">Save Order</button>
+                        <button type="button" class="btn btn-info" id="btnViewHistory">View Order History</button>
+                        <button type="button" class="btn btn-danger" id="btnExit">Exit</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Hidden Order History Section -->
+        <section id="historyView" class="main-content hidden">
+            <div class="card history-card">
+                <div class="card-header history-header">
+                    <div>
+                        <h2>Order History</h2>
+                        <p class="subtitle">View past cafeteria orders &bull; Double-click any row or click "View Details" to view itemised invoice</p>
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
+                        <button type="button" class="btn btn-outline" id="btnRefreshHistory">&#8635; Refresh</button>
+                        <button type="button" class="btn btn-secondary" id="btnBackToOrder">&larr; Back to Order</button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table" id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date &amp; Time</th>
+                                <th>Total Amount (₹)</th>
+                                <th>Status</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <tr>
+                                <td colspan="5" class="text-center" style="padding: 2rem; color: var(--text-secondary);">
+                                    Loading order history from database...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Details Modal -->
+        <div id="orderDetailsModal" class="modal-overlay hidden">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Order Details</h3>
+                    <button type="button" class="modal-close" id="btnModalClose" aria-label="Close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <pre id="modalInvoiceArea" class="invoice-display"></pre>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btnModalLoadToMain">Load to Main Invoice Panel</button>
+                    <button type="button" class="btn btn-secondary" id="btnModalCloseSecondary">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Cafeteria Food Order &amp; Billing System &bull; Java 17 + Spring Boot 3 + MySQL 8</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

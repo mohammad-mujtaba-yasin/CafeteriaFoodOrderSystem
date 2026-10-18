@@ -1,0 +1,635 @@
+/* ==========================================================================
+   Cafeteria Food Order & Billing System - Stylesheet (Vanilla CSS)
+   ========================================================================== */
+
+:root {
+    --bg-page: #f1f5f9;
+    --bg-surface: #ffffff;
+    --bg-surface-alt: #f8fafc;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    
+    --color-primary: #0284c7;
+    --color-primary-hover: #0369a1;
+    --color-success: #16a34a;
+    --color-success-hover: #15803d;
+    --color-danger: #dc2626;
+    --color-danger-hover: #b91c1c;
+    --color-warning: #d97706;
+    --color-info: #4f46e5;
+    --color-info-hover: #4338ca;
+
+    --border-color: #e2e8f0;
+    --border-dark: #cbd5e1;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "Consolas", "Courier New", Courier, monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex: 1;
+}
+
+/* ==========================================================================
+   Top Panel (Header)
+   ========================================================================== */
+
+.top-panel {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: #ffffff;
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-md);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.logo-icon {
+    font-size: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.top-panel h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.live-clock-badge {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    padding: 0.45rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.clock-icon {
+    font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   Status & Alert Banner
+   ========================================================================== */
+
+.status-banner {
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: 0.925rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.25s ease;
+}
+
+.info-status {
+    background-color: #eff6ff;
+    border-left: 4px solid var(--color-primary);
+    color: #1e40af;
+}
+
+.success-status {
+    background-color: #f0fdf4;
+    border-left: 4px solid var(--color-success);
+    color: #166534;
+}
+
+.warn-status {
+    background-color: #fffbeb;
+    border-left: 4px solid var(--color-warning);
+    color: #92400e;
+}
+
+/* ==========================================================================
+   Main Grid Layout
+   ========================================================================== */
+
+.main-content {
+    transition: opacity 0.2s ease;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 1.1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-surface-alt);
+}
+
+.card-header h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.badge {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+}
+
+.receipt-pill {
+    background: #f1f5f9;
+    border: 1px solid var(--border-dark);
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.925rem;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: var(--bg-surface-alt);
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: middle;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.col-select {
+    width: 50px;
+    text-align: center;
+}
+
+.col-qty {
+    width: 90px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.font-medium {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.price-cell {
+    font-weight: 600;
+    color: #047857;
+}
+
+.item-select {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.qty-input {
+    width: 70px;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.qty-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+}
+
+/* Category Tags */
+.category-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.tag-snacks {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.tag-south {
+    background-color: #ffedd5;
+    color: #9a3412;
+}
+
+.tag-beverages {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.tag-fastfood {
+    background-color: #fce7f3;
+    color: #9d174d;
+}
+
+.tag-default {
+    background-color: #f1f5f9;
+    color: #334155;
+}
+
+.status-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+}
+
+.status-completed {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+/* ==========================================================================
+   Buttons & Actions
+   ========================================================================== */
+
+.card-footer-action {
+    padding: 0.85rem 1.25rem;
+    background: var(--bg-surface-alt);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action-row {
+    padding: 1rem 1.25rem;
+    background: var(--bg-surface-alt);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.bottom-panel {
+    padding: 1rem 1.25rem;
+    background: var(--bg-surface-alt);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.btn {
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.55rem 1.1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+    background-color: #475569;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: #334155;
+}
+
+.btn-outline {
+    background-color: #ffffff;
+    border-color: var(--border-dark);
+    color: var(--text-secondary);
+}
+
+.btn-outline:hover {
+    background-color: #f1f5f9;
+    color: var(--text-primary);
+}
+
+.btn-success {
+    background-color: var(--color-success);
+    color: #ffffff;
+}
+
+.btn-success:hover {
+    background-color: var(--color-success-hover);
+}
+
+.btn-info {
+    background-color: var(--color-info);
+    color: #ffffff;
+}
+
+.btn-info:hover {
+    background-color: var(--color-info-hover);
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background-color: var(--color-danger-hover);
+}
+
+.btn-sm {
+    padding: 0.25rem 0.65rem;
+    font-size: 0.775rem;
+}
+
+.btn:disabled,
+.btn[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* ==========================================================================
+   Invoice Panel
+   ========================================================================== */
+
+.invoice-container {
+    padding: 1rem 1.25rem;
+    background: #ffffff;
+}
+
+.invoice-display {
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    line-height: 1.45;
+    background: #0f172a;
+    color: #38bdf8;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    white-space: pre;
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+    border: 1px solid #1e293b;
+    min-height: 260px;
+}
+
+/* ==========================================================================
+   Order History Section
+   ========================================================================== */
+
+.history-card {
+    width: 100%;
+}
+
+.history-header {
+    background: #ffffff;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.history-header .subtitle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.2rem;
+}
+
+.history-row {
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.history-row:hover {
+    background-color: #f1f5f9;
+}
+
+/* ==========================================================================
+   Modal Dialog (Order Details)
+   ========================================================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-overlay.hidden {
+    display: none !important;
+}
+
+.modal-container {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-16px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-header {
+    padding: 1.25rem 1.5rem;
+    background: #1e293b;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 0.25rem;
+    border-radius: var(--radius-sm);
+    transition: color 0.15s ease;
+}
+
+.modal-close:hover {
+    color: #ffffff;
+}
+
+.modal-body {
+    padding: 1.25rem;
+    background: #f8fafc;
+}
+
+.modal-body .invoice-display {
+    min-height: 220px;
+    max-height: 400px;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    background: #ffffff;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.app-footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.825rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto;
+}
